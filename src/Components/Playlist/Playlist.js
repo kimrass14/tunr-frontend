@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faHeart, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import './Playlist.css';
 
 function Playlist(props) {
@@ -21,7 +23,7 @@ function Playlist(props) {
 				<div className='btns'>
 					
 						<button className='btn save-song' onClick={() => {props.handleSave(song)}}>
-							{'❤️'}
+							<FontAwesomeIcon icon={faHeart} />
 						</button>
 					<Link to='/edit'>
 						<button className='btn edit-song' onClick={
@@ -30,11 +32,11 @@ function Playlist(props) {
 							props.selectSong(song);
 							props.history.push('/edit')
 							}}>
-							Edit
+							<FontAwesomeIcon icon={faEdit} />
 						</button>
 					</Link>
 					<button className='btn remove-song' onClick={() => {props.handleDelete(song)}}>
-						Delete
+						<FontAwesomeIcon icon={faTrashAlt} />
 					</button>
 				</div>
 			</div>
@@ -44,10 +46,10 @@ function Playlist(props) {
 	const loading = 'Loading...';
 
 	return (
-		<>
+		<div className="playlist">
 			<h3>My Playlist</h3>
 			{props.list.length > 0 ? loaded : loading}
-		</>
+		</div>
 	);
 }
 

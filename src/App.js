@@ -66,6 +66,13 @@ function App() {
 		setFavs(newFavs);
 	};
 
+	const handleUnsave = (song) => {
+		const newFavs = [...favs];
+		const index = newFavs.findIndex((item) => song.id === item.id)
+		newFavs.splice(index, 1)
+		setFavs(newFavs)
+	}
+
 	return (
 		<>
 			<header>
@@ -78,6 +85,7 @@ function App() {
 						path='/'
 						render={(rp) => (
 							<>
+								
 								<Playlist
 									{...rp}
 									list={list}
@@ -85,8 +93,9 @@ function App() {
 									handleDelete={handleDelete}
 									handleSave={handleSave}
 								/>
-								<FavsList {...rp} favs={favs} />
+								<FavsList {...rp} favs={favs} handleUnsave={handleUnsave}/>
 								<Form {...rp} song={selectedSong} handleSubmit={handleCreate} />
+								
 							</>
 						)}
 					/>

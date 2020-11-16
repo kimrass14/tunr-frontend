@@ -18,7 +18,7 @@ function Form(props) {
 
 	//because form is there upon initial opening of site
 	//it needs to re-render to show updates / song to update
-	
+
 	useEffect(() => {
 		setFormData(props.song)
 	}, [props.song.id])
@@ -43,6 +43,7 @@ function Form(props) {
 			<h3>Add a new song</h3>
 			<form onSubmit={handleSubmit}>
 				<input
+					className="inputs"
 					type='text'
 					name='title'
 					value={formData.title}
@@ -51,6 +52,7 @@ function Form(props) {
 					onChange={handleChange}
 				/>
 				<input
+					className="inputs"
 					type='text'
 					name='artist'
 					value={formData.artist}
@@ -58,14 +60,17 @@ function Form(props) {
 					onChange={handleChange}
 				/>
 				<input
+					className="inputs"
 					type='text'
 					name='time'
 					value={formData.time}
 					placeholder='Time'
 					onChange={handleChange}
 				/>
-				<input type='submit' value='Add song' />
-				<input type='submit' value='Update' />
+				<div className="btn-div">
+					<input type='submit' value='Add song' className="button"/>
+					<input type='submit' value='Update' className="button"/>
+				</div>
 			</form>
 		</div>
 	);
