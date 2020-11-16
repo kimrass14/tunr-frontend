@@ -19,19 +19,20 @@ function Playlist(props) {
 					</span>
 				</div>
 				<div className='btns'>
-					<Link to='/edit'>
+					
 						<button className='btn save-song' onClick={() => {props.handleSave(song)}}>
 							{'❤️'}
 						</button>
+					<Link to='/edit'>
+						<button className='btn edit-song' onClick={
+							() => {
+								console.log('song', song)
+							props.selectSong(song);
+							props.history.push('/edit')
+							}}>
+							Edit
+						</button>
 					</Link>
-					<button className='btn edit-song' onClick={
-						() => {
-							console.log('song', song)
-						props.selectSong(song);
-						props.history.push('/edit')
-						}}>
-						Edit
-					</button>
 					<button className='btn remove-song' onClick={() => {props.handleDelete(song)}}>
 						Delete
 					</button>

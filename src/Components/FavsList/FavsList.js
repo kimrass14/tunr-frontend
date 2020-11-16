@@ -2,7 +2,7 @@ import React from 'react';
 import './FavsList.css';
 
 function FavsList(props) {
-	console.log('favs', props)
+	// console.log('favs', props)
 	const loaded = props.favs.map((fav, index) => {
 		return (
 			<div className='fav' key={index}>

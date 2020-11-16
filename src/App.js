@@ -22,13 +22,13 @@ function App() {
 	const selectSong = (song) => {
 		setSelectedSong(song);
 	};
-	console.log('selectedSong', selectedSong)
+	// console.log('selectedSong', selectedSong)
 
 	const getSongs = () => {
 		fetch(url + '/songs/')
 			.then((response) => response.json())
 			.then((data) => {
-				console.log('data', data)
+				// console.log('data', data)
 				setList(data);
 			});
 	};
@@ -46,7 +46,7 @@ function App() {
 	};
 
 	const handleUpdate = (song) => {
-		fetch(url + '/songs/' + song._id, {
+		fetch(url + '/songs/' + song.id, {
 			method: 'put',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(song),
@@ -54,8 +54,8 @@ function App() {
 	};
 
 	const handleDelete = (song) => {
-		console.log('song', song)
-		fetch(url + '/songs/' + song._id, {
+		console.log('delete - song', song)
+		fetch(url + '/songs/' + song.id, {
 			method: 'delete',
 		}).then((response) => getSongs());
 	};

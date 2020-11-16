@@ -1,16 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Form.css';
 
 function Form(props) {
+	// console.log('form props', props)
+	console.log('form props.song', props.song) //returns selected song
 	
-	const [formData, setFormData] = useState(props.song);
-	// console.log('formData', props.song)
-	// console.log('form data title', formData)
+//DESTRUCTURING
+	// const [formData, setFormData] = useState({title: props.song.title, artist: props.song.artist, time: props.song.time});
+	// 	console.log('form data', formData) 
+	// 	//return is song with empty values
+	// const {title} = props.song.title
+	// 	console.log('title', title) 
+		//returns 'undefined'
+
+	const [formData, setFormData] = useState(props.song)
+		console.log('formData', formData)
+
+	//because form is there upon initial opening of site
+	//it needs to re-render to show updates / song to update
+	
+	useEffect(() => {
+		setFormData(props.song)
+	}, [props.song.id])
+	console.log('formData', formData)
 
 	const handleChange = (e) => {
 		const key = e.target.name;
 		const value = e.target.value;
 		setFormData({ ...formData, [key]: value });
+		console.log("value", value)
 	};
 
 	const handleSubmit = (event) => {
@@ -27,21 +45,22 @@ function Form(props) {
 				<input
 					type='text'
 					name='title'
-					value={props.song.title}
+					value={formData.title}
+					// defaultValue="hello"
 					placeholder='Title'
 					onChange={handleChange}
 				/>
 				<input
 					type='text'
 					name='artist'
-					value={props.song.artist}
+					value={formData.artist}
 					placeholder='Artist'
 					onChange={handleChange}
 				/>
 				<input
 					type='text'
 					name='time'
-					value={props.song.time}
+					value={formData.time}
 					placeholder='Time'
 					onChange={handleChange}
 				/>
