@@ -6,8 +6,9 @@ import FavsList from './Components/FavsList/FavsList';
 import Form from './Components/Form/Form';
 
 function App() {
-	// const url = 'http://tunr-backend.herokuapp.com/api';
-	const url = 'http://localhost:3000'
+	
+	// const url = 'http://localhost:3000'
+	const url = 'https://tunr-kr-backend.herokuapp.com'
 
 	const [list, setList] = React.useState([]);
 	const [favs, setFavs] = React.useState([]);
