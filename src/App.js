@@ -4,14 +4,17 @@ import { Route, Link, Switch } from 'react-router-dom';
 import Playlist from './Components/Playlist/Playlist';
 import FavsList from './Components/FavsList/FavsList';
 import Form from './Components/Form/Form';
+import User from './Components/User/User'
 
 function App() {
 	
-	// const url = 'http://localhost:3000'
-	const url = 'https://tunr-kr-backend.herokuapp.com'
+	const url = 'http://localhost:3000'
+	// const url = 'https://tunr-kr-backend.herokuapp.com'
 
 	const [list, setList] = React.useState([]);
+	const [userList, setUserList] = React.useState([])
 	const [favs, setFavs] = React.useState([]);
+	const [userId, setUserId] = React.useState([])
 
 	const emptySong = {
 		artist: '',
@@ -24,6 +27,8 @@ function App() {
 		setSelectedSong(song);
 	};
 	// console.log('selectedSong', selectedSong)
+
+	// console.log('userId 0', + userId[0])
 
 	const getSongs = () => {
 		fetch(url + '/songs/')
@@ -74,12 +79,32 @@ function App() {
 		setFavs(newFavs)
 	}
 
+	let id = 0
+	const handleId = (user) => {
+		id = user.id
+
+		const getUserSongs = () => {
+		fetch(url + '/users/' + id)
+			.then((response) => response.json())
+			.then((data) => {
+				console.log('data', data.songs)
+				setUserList(data.songs);
+			});
+		};
+		getUserSongs()
+	// React.useEffect(() => {
+	// 	getUserSongs();
+	// }, []);
+	}
+	
+
 	return (
 		<>
 			<header>
 				<h1>TUNR</h1>
 				<h2>FOR ALL YOUR PLAYLIST NEEDS</h2>
 			</header>
+			<User url={url} handleClick={handleId}/>
 			<main>
 				<Switch>
 					<Route
@@ -90,6 +115,7 @@ function App() {
 								<Playlist
 									{...rp}
 									list={list}
+									userList={userList}
 									selectSong={selectSong}
 									handleDelete={handleDelete}
 									handleSave={handleSave}

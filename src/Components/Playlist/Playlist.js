@@ -6,7 +6,8 @@ import './Playlist.css';
 
 function Playlist(props) {
 
-	const loaded = props.list.map((song, index) => {
+	const loaded = props.userList.map((song, index) => {
+// const loaded = props.list.map((song, index) => {
 		return (
 			<div className='song' key={index}>
 				<div className='song-info'>
